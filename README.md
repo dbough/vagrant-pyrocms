@@ -22,7 +22,9 @@ Instructions
 Notes
 -----
 
-- You can choose which PyroCMS repo to use by changing `REPO` on line 8 of `boostrap.sh` (this has only been tested with `2.2/master`).
+- You can choose which PyroCMS repo to use by changing the value of `REPO` on line 8 of `boostrap.sh` (this has only been tested with `2.2/master`).
+- If you want to create friendly URLs, change the value of `REWRITE` on line 11 of `bootstrap.sh` to `YES`.
+- If you want to unlock the root account, change the value of `ROOT` on line 14 of `bootstrap.sh` to 'YES'.  The `root` password will be `password`.
 - If you don't have the precise32 box on your machine, it will automatically be downloaded.  This can take a few minutes the first time it runs.
 - MySQL credentials are `root` / `password`
 

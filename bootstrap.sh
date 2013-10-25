@@ -7,6 +7,12 @@
 # Choose your repo (only tested on 2.2/master)
 REPO=2.2/master
 
+# Using mod rewrite? (YES/NO)
+REWRITE=NO
+
+# Unlock the root and give it a password? (YES/NO)
+ROOT=NO
+
 if [ ! -f /var/log/firsttime ];
 then
 	sudo touch /var/log/firsttime
@@ -38,6 +44,18 @@ then
 
     # php5-mysql comes w/mysql drivers, but we still have to update php.ini to use them.
     sudo sed -i 's/;pdo_odbc.db2_instance_name/;pdo_odbc.db2_instance_name\nextension=pdo_mysql.so/' /etc/php5/apache2/php.ini
-
+	
     sudo service apache2 restart
+	
+	if [ $ROOT = 'YES' ]
+	then
+		sudo usermod -U root
+		sudo echo -e "password\npassword" | passwd root
+	fi
+fi
+
+# Copy add htaccess file if you're rewriting URLs
+if [ $REWRITE = 'YES' ]
+then
+	sudo cp /home/vagrant/shared/htaccess /var/www/.htaccess
 fi
