@@ -8,10 +8,10 @@
 REPO=2.2/master
 
 # Using mod rewrite? (YES/NO)
-REWRITE=NO
+REWRITE=YES
 
 # Unlock the root and give it a password? (YES/NO)
-ROOT=NO
+ROOT=YES
 
 if [ ! -f /var/log/firsttime ];
 then
@@ -47,15 +47,16 @@ then
 	
     sudo service apache2 restart
 	
-	if [ $ROOT = 'YES' ]
-	then
-		sudo usermod -U root
-		sudo echo -e "password\npassword" | passwd root
-	fi
 fi
 
 # Copy add htaccess file if you're rewriting URLs
 if [ $REWRITE = 'YES' ]
 then
 	sudo cp /home/vagrant/shared/htaccess /var/www/.htaccess
+fi
+
+if [ $ROOT = 'YES' ]
+then
+        sudo usermod -U root
+	echo -e "password\npassword" | sudo passwd root
 fi
